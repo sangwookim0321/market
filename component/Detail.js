@@ -6,30 +6,28 @@ import { Button, Divider } from "semantic-ui-react";
 import Numeral from "numeral";
 
 import { useAtom } from "jotai";
-import { DetailItem } from "../jotai/jotaiProvider";
+import { Detail_Item } from "../jotai/jotaiProvider";
 
 export default function Detail(){
 
-    const [getDetailItem, setDetailItem] = useAtom(DetailItem);
-
+    const [get_Detail_Item, set_Detail_Item] = useAtom(Detail_Item);
+    
     return(
         <Container>
             <Item_Wrap_Detail>
                 <Image_Box>
-                    <Img src={getDetailItem?.URL} alt={getDetailItem?.이름} />
+                    <Img src={get_Detail_Item?.URL} alt={get_Detail_Item?.이름} />
                 </Image_Box>
                 <Item_Text_Box>
-                    <Text_Name>{getDetailItem?.이름}</Text_Name>
-                    <Text_Price>{Numeral(getDetailItem?.가격).format(0,0)}원</Text_Price>
-                    <Text_Gray>{getDetailItem?.카테고리}</Text_Gray>
+                    <Text_Name>{get_Detail_Item?.이름}</Text_Name>
+                    <Text_Price>{Numeral(get_Detail_Item?.가격).format(0,0)}원</Text_Price>
+                    <Text_Gray>{get_Detail_Item?.카테고리}</Text_Gray>
                     <Button color="black">구매하기</Button>
-
                 </Item_Text_Box>
-                
             </Item_Wrap_Detail>
             <Divider/>
             <Text_h3 as="h3">Description</Text_h3>
-            <Text_P_tag>{getDetailItem?.설명}</Text_P_tag>
+            <Text_P_tag>{get_Detail_Item?.설명}</Text_P_tag>
         </Container>
     )
 }

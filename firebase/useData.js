@@ -1,10 +1,10 @@
 import { useEffect } from "react"
 import { useAtom } from "jotai";
-import { StoreData, Status } from "../jotai/jotaiProvider";
+import { Store_Data, Status } from "../jotai/jotaiProvider";
 import firebase from "./firebaseApp"
 
 export const useData = () => {
-    const [itemList, setItemList] = useAtom(StoreData);
+    const [itemList, setItemList] = useAtom(Store_Data);
     const [status, setStatus] = useAtom(Status);
     
     async function getData(){
