@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Link from "next/link"
 import Image from 'next/image'
 import { Divider } from "semantic-ui-react";
-
 import ItemList from '../component/ItemList';
+
 import { useData } from "../firebase/useData";
 import { useAtom } from "jotai";
 import { Store_Data } from "../jotai/jotaiProvider";
@@ -27,7 +27,7 @@ export default function Home({ data }) {
 
   useEffect(() => {
     set_Global_Data(data);
-  }, [data])
+  }, [data]);
 
   return (
     <>
@@ -38,6 +38,10 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* {
+        admin && <Text_h3>반갑습니다! 관리자님</Text_h3>
+      } */}
+      
       <Text_h3>
         베스트 상품
       </Text_h3>

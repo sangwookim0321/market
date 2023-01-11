@@ -38,7 +38,7 @@ const Post = ({ data }) => {
         </Head>
         
             {
-                <Detail />
+                <Detail data={data} />
             }
         </>
     )
