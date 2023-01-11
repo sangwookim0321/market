@@ -10,6 +10,9 @@ import { useAtom } from "jotai";
 import { Store_Data } from "../jotai/jotaiProvider";
 import { useEffect } from "react";
 
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase/auth";
+
 export const getServerSideProps = async () => {
 
   const { data } = await useData();
@@ -22,7 +25,8 @@ export const getServerSideProps = async () => {
 }
 
 export default function Home({ data }) {
-
+  
+  const [user, loading] = useAuthState(auth);
   const [global_Data, set_Global_Data] = useAtom(Store_Data);
 
   useEffect(() => {
@@ -38,9 +42,9 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* {
-        admin && <Text_h3>반갑습니다! 관리자님</Text_h3>
-      } */}
+      {
+        user && <Text_h3>반갑습니다! 관리자님</Text_h3>
+      }
       
       <Text_h3>
         베스트 상품

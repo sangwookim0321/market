@@ -1,32 +1,39 @@
-import { Button, Form } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { useRouter } from "next/router";
 
-import { auth } from "../firebase/firebaseAuth";
-import { useAtom } from "jotai";
-import { Admin_ID, Admin_PASSWORD } from "../jotai/jotaiProvider";
+import auth from "../firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Login(){
-
-    const [email, setEmail] = useAtom(Admin_ID);
-    const [password, setPassword] = useAtom(Admin_PASSWORD);
-
+    
     const router = useRouter();
 
-    const submit = async () => {
-
+    const [user, loading] = useAuthState(auth);
+    
+    if(loading){
+        return <div>Loading...</div>
     }
+
+    const provider = new GoogleAuthProvider();
+
+    const signIn = async () => {
+        const result = await signInWithPopup(auth, provider);
+        
+        const token = await result.user.getIdToken();
+
+        await fetch("/api/login", {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ token }),
+        })
+        await router.push("/admin")
+    }
+    
 
     return(
         <div>
-            <Form>
-                <Form.Field inline>
-                    <input onChange={e => setEmail(e.target.value)} type="email" placeholder="Email" />
-                </Form.Field>
-                <Form.Field inline>
-                    <input onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
-                </Form.Field>
-                <Button onClick={submit}>접속</Button>
-            </Form>
+            <Button onClick={signIn}>관리자 로그인</Button>
         </div>
     )
 }
