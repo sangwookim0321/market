@@ -2,10 +2,11 @@ import {
     Text_Gray, Container, Item_Wrap,
     Item_Text_Box, Text_Price, Text_Name
 } from "../styles/commonStyeld";
-import { Grid } from 'semantic-ui-react'
+import { Button, Grid } from 'semantic-ui-react'
 import Numeral from "numeral";
-
 import Link from "next/link";
+import { doc, deleteDoc } from "firebase/firestore";
+import db from "../firebase/db";
 
 export default function ItemList({ data }){
 

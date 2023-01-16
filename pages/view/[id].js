@@ -23,7 +23,6 @@ export const getServerSideProps = async ( context ) => {
   }
 
 const Post = ({ data }) => {
-
     const [find_Get_Data, set_Find_Data] = useAtom(Find_Data);
     
     useEffect(() => {
